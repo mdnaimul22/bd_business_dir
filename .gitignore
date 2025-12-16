@@ -1,5 +1,5 @@
 __pycache__/
 *.pyc
-shop_details.db
+#shop_details.db
 .env
 .DS_Store
