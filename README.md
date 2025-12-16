@@ -1,6 +1,6 @@
 # BD Business Directory
 
-A robust Python Flask application designed to manage and display a directory of businesses. This application utilizes a SQLite database for efficient data storage and offers a user-friendly web interface for searching, viewing, and managing shop details.
+This application utilizes a SQLite database that offers a user-friendly web interface for searching, viewing, and managing shop details.
 
 ## Features
 
