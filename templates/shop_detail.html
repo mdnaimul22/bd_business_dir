@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ shop.name }} - বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কশপ{% endblock %}
+
+{% block content %}
+<section class="shop-detail">
+    <div class="shop-detail-header">
+        <h1>{{ shop.name }}</h1>
+        {% if shop.category_name %}
+        <a href="{{ url_for('category_shops', category_id=shop.category_id) }}" class="category-badge large">
+            {{ shop.category_name }}
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="shop-detail-body">
+        <div class="detail-grid">
+
+            <!-- Products Card (First) -->
+            <div class="detail-card">
+                <h3>📦 পণ্য তালিকা</h3>
+                <div class="products-content">
+                    {{ shop.products or 'কোনো পণ্যের তালিকা নেই' }}
+                </div>
+            </div>
+
+            <!-- Business Info Card (Middle) -->
+            <div class="detail-card">
+                <h3>� ব্যবসায়িক তথ্য</h3>
+
+                <div class="detail-row">
+                    <div class="detail-label">মালিক:</div>
+                    <div class="detail-value">{{ shop.proprietor or '-' }}</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">অনলাইন লেনদেন:</div>
+                    <div class="detail-value">{{ shop.transaction_status or '-' }}</div>
+                </div>
+            </div>
+
+            <!-- Contact Info Card (Last) -->
+            <div class="detail-card">
+                <h3>📞 যোগাযোগ</h3>
+
+                <div class="detail-row">
+                    <div class="detail-label">📍 ঠিকানা:</div>
+                    <div class="detail-value">{{ shop.address or '-' }}</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">� মোবাইল:</div>
+                    <div class="detail-value">
+                        {% if shop.mobile %}
+                        {% for num in shop.mobile.split() %}
+                        <a href="tel:{{ num }}" class="phone-link">{{ num }}</a>
+                        {% endfor %}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">� হোয়াটসএপ:</div>
+                    <div class="detail-value">
+                        {% if shop.whatsapp %}
+                        <a href="https://wa.me/{{ shop.whatsapp.replace('-', '').replace(' ', '') }}" target="_blank"
+                            class="whatsapp-link">
+                            {{ shop.whatsapp }}
+                        </a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">📧 ইমেইল/ওয়েব:</div>
+                    <div class="detail-value">
+                        {% set contact = shop.email_web | parse_contact_info %}
+                        {% if contact.type == 'email' %}
+                        <a href="mailto:{{ contact.value }}" class="email-link">{{ contact.value }}</a>
+                        {% elif contact.type == 'web' %}
+                        <a href="{{ contact.value if 'http' in contact.value else 'http://' + contact.value }}"
+                            target="_blank" class="web-link">{{ contact.value }}</a>
+                        {% else %}
+                        {{ contact.value }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="shop-detail-actions">
+        <a href="{{ url_for('edit_shop', shop_id=shop.id) }}" class="btn btn-primary">✏️ সম্পাদনা করুন</a>
+        <form action="{{ url_for('delete_shop', shop_id=shop.id) }}" method="POST" class="delete-form"
+            onsubmit="return confirm('আপনি কি নিশ্চিতভাবে এই দোকানটি মুছে ফেলতে চান?');">
+            <button type="submit" class="btn btn-danger">🗑️ মুছে ফেলুন</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">← ফিরে যান</a>
+    </div>
+</section>
+{% endblock %}

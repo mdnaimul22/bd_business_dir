@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কশপ{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Overlay for mobile/sidebar -->
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <span class="material-icons">menu</span>
+                </button>
+                <a href="{{ url_for('index') }}" class="logo">
+                    <span class="material-icons logo-icon">storefront</span>
+                    বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কসপ
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">হোম</a>
+                <a href="{{ url_for('shop_list') }}" class="nav-link">সকল দোকান</a>
+                <a href="{{ url_for('add_shop') }}" class="nav-link btn-primary">
+                    <span class="material-icons">add_circle</span>
+                    নতুন দোকান
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>ক্যাটেগরি সমূহ</h3>
+            <button class="close-sidebar" id="closeSidebar">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div class="category-list">
+                {% for cat in categories if categories %}
+                <a href="{{ url_for('category_shops', category_id=cat.id) }}" class="sidebar-link">
+                    {{ cat.name }}
+                </a>
+                {% else %}
+                <!-- If categories not passed globally, fetching via ajax or they might be in context -->
+                <p class="no-cats">ক্যাটেগরি লোড হচ্ছে...</p>
+                {% endfor %}
+            </div>
+        </div>
+    </aside>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+                {{ message }}
+                <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; ২০২৬ বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কসপ | সিটি বাইপাস, মোস্তফার মোড়, হরিন্টানা খুলনা</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}হোম - বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কশপ{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>হার্ডওয়্যার ও মেকানিক্যাল সাপ্লায়ার ডিরেক্টরি</h1>
+    <p class="hero-subtitle">ইঞ্জিনিয়ারিং ওয়ার্কশপ, সরবরাহকারী এবং বিক্রেতাদের তথ্য</p>
+
+    <form class="search-form" action="{{ url_for('index') }}" method="GET">
+        <div class="search-box">
+            <input type="text" name="q" value="{{ query }}"
+                placeholder="পণ্য, ক্যাটেগরি, মোবাইল নম্বর বা দোকানের নাম দিয়ে খুঁজুন..." class="search-input"
+                id="searchInput">
+            <button type="submit" class="search-btn">
+                🔍 খুঁজুন
+            </button>
+        </div>
+    </form>
+
+    <!-- Search Results (Only show if searching) -->
+    {% if query %}
+    <div class="search-results-header" style="margin-top: 2rem; margin-bottom: 1rem; text-align: left;">
+        <h2>🔍 অনুসন্ধান ফলাফল: "{{ query }}"</h2>
+    </div>
+
+    {% if shops %}
+    <div class="shops-grid" style="text-align: left;">
+        {% for shop in shops %}
+        <div class="shop-card">
+            <div class="shop-header">
+                <span class="shop-name"><a href="{{ url_for('shop_detail', shop_id=shop.id) }}">{{ shop.name
+                        }}</a></span>
+                <span class="shop-category">{{ shop.category_name }}</span>
+            </div>
+
+            <div class="shop-info">
+                {% if shop.proprietor %}
+                <p><strong>মালিক:</strong> {{ shop.proprietor }}</p>
+                {% endif %}
+
+                {% if shop.mobile %}
+                <p><strong>মোবাইল:</strong> {{ shop.mobile }}</p>
+                {% endif %}
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-results">
+        <p>কোনো দোকান পাওয়া যায়নি।</p>
+    </div>
+    {% endif %}
+
+    <div style="margin-top: 2rem;">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">মুছন</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

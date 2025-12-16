@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if action == 'add' %}নতুন দোকান যোগ করুন{% else %}দোকান সম্পাদনা{% endif %} - বাংলাদেশ ইঞ্জিনিয়ারিং
+ওয়ার্কশপ{% endblock %}
+
+{% block content %}
+<section class="shop-form-section">
+    <h1>
+        {% if action == 'add' %}
+        ➕ নতুন দোকান যোগ করুন
+        {% else %}
+        ✏️ দোকান সম্পাদনা করুন
+        {% endif %}
+    </h1>
+
+    <form method="POST" class="shop-form">
+        <div class="form-grid">
+            <div class="form-group full-width">
+                <label for="category_id">📂 ক্যাটেগরি</label>
+                <div class="category-input-group">
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">-- ক্যাটেগরি নির্বাচন করুন --</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat.id }}" {% if shop.category_id==cat.id %}selected{% endif %}>
+                            {{ cat.name }} ({{ cat.name_english }})
+                        </option>
+                        {% endfor %}
+                        <option value="new">+ নতুন ক্যাটেগরি যোগ করুন</option>
+                    </select>
+                    <input type="text" name="new_category_name" id="new_category_name" class="form-control"
+                        placeholder="নতুন ক্যাটেগরির নাম লিখুন" style="display: none;">
+                </div>
+            </div>
+
+            <!-- Serial No removed as per request -->
+
+            <div class="form-group full-width">
+                <label for="name">🏪 প্রতিষ্ঠানের নাম <span class="required">*</span></label>
+                <input type="text" name="name" id="name" class="form-control" required value="{{ shop.name or '' }}"
+                    placeholder="প্রতিষ্ঠানের নাম লিখুন">
+            </div>
+
+            <div class="form-group">
+                <label for="proprietor">👤 মালিক</label>
+                <input type="text" name="proprietor" id="proprietor" class="form-control"
+                    value="{{ shop.proprietor or '' }}" placeholder="মালিকের নাম">
+            </div>
+
+            <div class="form-group">
+                <label for="address">📍 ঠিকানা</label>
+                <input type="text" name="address" id="address" class="form-control" value="{{ shop.address or '' }}"
+                    placeholder="দোকানের ঠিকানা">
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">📱 মোবাইল</label>
+                <input type="text" name="mobile" id="mobile" class="form-control" value="{{ shop.mobile or '' }}"
+                    placeholder="০১৭XX-XXXXXX, ০১৮XX-XXXXXX">
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">💬 হোয়াটসএপ</label>
+                <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ shop.whatsapp or '' }}"
+                    placeholder="হোয়াটসএপ নম্বর">
+            </div>
+
+            <div class="form-group">
+                <label for="transaction_status">💰 অনলাইন লেনদেন</label>
+                <input type="text" name="transaction_status" id="transaction_status" class="form-control"
+                    value="{{ shop.transaction_status or '' }}" placeholder="বিক্যাশ ০১৮XX-XXXXXX">
+            </div>
+
+            <div class="form-group">
+                <label for="email_web">📧 ইমেইল/ওয়েব</label>
+                <input type="text" name="email_web" id="email_web" class="form-control"
+                    value="{{ shop.email_web or '' }}" placeholder="ইমেইল বা ওয়েবসাইট">
+            </div>
+
+            <div class="form-group full-width">
+                <label for="products">📦 পণ্য তালিকা</label>
+                <textarea name="products" id="products" class="form-control" rows="4"
+                    placeholder="এই দোকানে যেসব পণ্য পাওয়া যায়...">{{ shop.products or '' }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">
+                {% if action == 'add' %}
+                ➕ দোকান যোগ করুন
+                {% else %}
+                💾 সংরক্ষণ করুন
+                {% endif %}
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">বাতিল</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

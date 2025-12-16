@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}সকল দোকান - বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কশপ{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>
+        {% if current_category %}
+        📂 {{ current_category.name }}
+        <span class="subtitle">{{ current_category.name_english }}</span>
+        {% else %}
+        🏪 সকল দোকান সমূহ
+        {% endif %}
+    </h1>
+    <p>মোট {{ total }} টি দোকান</p>
+</section>
+
+<section class="shops-section">
+    {% if shops %}
+    <div class="shops-table-container">
+        <table class="shops-table">
+            <thead>
+                <tr>
+                    <th>নং</th>
+                    <th>প্রতিষ্ঠান</th>
+                    <th>মালিক</th>
+                    <th>ঠিকানা</th>
+                    <th>মোবাইল</th>
+                    <th>ক্যাটেগরি</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for shop in shops %}
+                <tr>
+                    <td>{{ loop.index + ((page-1) * 20) }}</td>
+                    <td>
+                        <a href="{{ url_for('shop_detail', shop_id=shop.id) }}" class="shop-link">
+                            {{ shop.name }}
+                        </a>
+                    </td>
+                    <td>{{ shop.proprietor or '-' }}</td>
+                    <td>{{ shop.address or '-' }}</td>
+                    <td>
+                        {% if shop.mobile %}
+                        {% for num in shop.mobile.split() %}
+                        <div class="mobile-number">
+                            <a href="tel:{{ num }}" class="mobile-link">{{ num }}</a>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if shop.category_name %}
+                        <a href="{{ url_for('category_shops', category_id=shop.category_id) }}" class="category-badge">
+                            {{ shop.category_name }}
+                        </a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if total_pages > 1 %}
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="?page={{ page - 1 }}" class="page-link">← আগের</a>
+        {% endif %}
+
+        <span class="page-info">পৃষ্ঠা {{ page }} / {{ total_pages }}</span>
+
+        {% if page < total_pages %} <a href="?page={{ page + 1 }}" class="page-link">পরের →</a>
+            {% endif %}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="no-results">
+        <p>কোনো দোকান পাওয়া যায়নি।</p>
+        <a href="{{ url_for('index') }}" class="btn">হোমে ফিরুন</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
