@@ -1,0 +1,236 @@
+# Bangla translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-12-16 09:54-0500\n"
+"PO-Revision-Date: 2025-12-16 09:53-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: bn\n"
+"Language-Team: bn <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/base.html:31
+msgid "Home"
+msgstr "হোম"
+
+#: templates/base.html:32 templates/shop_list.html:12
+msgid "All Shops"
+msgstr "সকল দোকান"
+
+#: templates/base.html:35
+msgid "New Shop"
+msgstr "নতুন দোকান"
+
+#: templates/base.html:51
+msgid "Categories"
+msgstr "ক্যাটেগরি সমূহ"
+
+#: templates/base.html:89 templates/shop_form.html:4
+msgid "Bangladesh Engineering Workshop"
+msgstr "বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কশপ"
+
+#: templates/base.html:89
+msgid ""
+"City Bypass, Mostofar Mor, Horintana\n"
+"                Khulna"
+msgstr "সিটি বাইপাস, মোস্তফার মোড়, হরিন্টানা খুলনা"
+
+#: templates/index.html:7
+msgid "Hardware & Mechanical Supplier Directory"
+msgstr "হার্ডওয়্যার ও মেকানিক্যাল সাপ্লায়ার ডিরেক্টরি"
+
+#: templates/index.html:8
+msgid "Information of Engineering Workshops, Suppliers and Sellers"
+msgstr "ইঞ্জিনিয়ারিং ওয়ার্কশপ, সরবরাহকারী এবং বিক্রেতাদের তথ্য"
+
+#: templates/index.html:13
+msgid "Search by product, category, mobile number or shop name..."
+msgstr "পণ্য, ক্যাটেগরি, মোবাইল নম্বর বা দোকানের নাম দিয়ে খুঁজুন..."
+
+#: templates/index.html:16
+msgid "Search"
+msgstr "খুঁজুন"
+
+#: templates/index.html:24
+msgid "Search Results"
+msgstr "অনুসন্ধান ফলাফল"
+
+#: templates/index.html:39
+msgid "Owner"
+msgstr "মালিক"
+
+#: templates/index.html:43 templates/shop_form.html:56
+#: templates/shop_list.html:28
+msgid "Mobile"
+msgstr "মোবাইল"
+
+#: templates/index.html:53 templates/shop_list.html:86
+msgid "No shops found."
+msgstr "কোনো দোকান পাওয়া যায়নি।"
+
+#: templates/index.html:58
+msgid "Clear"
+msgstr "মুছন"
+
+#: templates/shop_detail.html:21 templates/shop_form.html:80
+msgid "Products List"
+msgstr "পণ্য তালিকা"
+
+#: templates/shop_detail.html:23
+msgid "No products list available"
+msgstr "কোনো পণ্যের তালিকা নেই"
+
+#: templates/shop_detail.html:29
+msgid "Business Info"
+msgstr "ব্যবসায়িক তথ্য"
+
+#: templates/shop_detail.html:32 templates/shop_form.html:44
+#: templates/shop_list.html:26
+msgid "Proprietor"
+msgstr "মালিক"
+
+#: templates/shop_detail.html:37 templates/shop_form.html:68
+msgid "Online Transaction"
+msgstr "অনলাইন লেনদেন"
+
+#: templates/shop_detail.html:79 templates/shop_form.html:74
+msgid "Email/Web"
+msgstr "ইমেইল/ওয়েব"
+
+#: templates/shop_detail.html:98
+msgid "Edit"
+msgstr "সম্পাদনা করুন"
+
+#: templates/shop_detail.html:100
+msgid "Are you sure you want to delete this shop?"
+msgstr "আপনি কি নিশ্চিতভাবে এই দোকানটি মুছে ফেলতে চান?"
+
+#: templates/shop_detail.html:101
+msgid "Delete"
+msgstr "মুছে ফেলুন"
+
+#: templates/shop_detail.html:103
+msgid "Back"
+msgstr "ফিরে যান"
+
+#: templates/shop_form.html:3 templates/shop_form.html:10
+msgid "Add New Shop"
+msgstr "নতুন দোকান যোগ করুন"
+
+#: templates/shop_form.html:3 templates/shop_form.html:12
+msgid "Edit Shop"
+msgstr "দোকান সম্পাদনা করুন"
+
+#: templates/shop_form.html:19 templates/shop_list.html:29
+msgid "Category"
+msgstr "ক্যাটেগরি"
+
+#: templates/shop_form.html:22
+msgid "Select Category"
+msgstr "ক্যাটেগরি নির্বাচন করুন"
+
+#: templates/shop_form.html:28
+msgid "Add New Category"
+msgstr "নতুন ক্যাটেগরি যোগ করুন"
+
+#: templates/shop_form.html:31
+msgid "Enter new category name"
+msgstr "নতুন ক্যাটেগরির নাম লিখুন"
+
+#: templates/shop_form.html:38
+msgid "Shop Name"
+msgstr "প্রতিষ্ঠানের নাম"
+
+#: templates/shop_form.html:40
+msgid "Enter shop name"
+msgstr "প্রতিষ্ঠানের নাম লিখুন"
+
+#: templates/shop_form.html:46
+msgid "Proprietor Name"
+msgstr "মালিকের নাম"
+
+#: templates/shop_form.html:50 templates/shop_list.html:27
+msgid "Address"
+msgstr "ঠিকানা"
+
+#: templates/shop_form.html:52
+msgid "Shop Address"
+msgstr "দোকানের ঠিকানা"
+
+#: templates/shop_form.html:58
+msgid "e.g. 017XX-XXXXXX"
+msgstr "যেমন: ০১৭XX-XXXXXX"
+
+#: templates/shop_form.html:62
+msgid "WhatsApp"
+msgstr "হোয়াটসএপ"
+
+#: templates/shop_form.html:64
+msgid "WhatsApp Number"
+msgstr "হোয়াটসএপ নম্বর"
+
+#: templates/shop_form.html:70
+msgid "e.g. Bkash 018XX-XXXXXX"
+msgstr "যেমন: বিকাশ ০১৮XX-XXXXXX"
+
+#: templates/shop_form.html:76
+msgid "Email or Website"
+msgstr "ইমেইল বা ওয়েবসাইট"
+
+#: templates/shop_form.html:82
+msgid "Products available in this shop..."
+msgstr "এই দোকানে যেসব পণ্য পাওয়া যায়..."
+
+#: templates/shop_form.html:89
+msgid "Add Shop"
+msgstr "দোকান যোগ করুন"
+
+#: templates/shop_form.html:91
+msgid "Save"
+msgstr "সংরক্ষণ করুন"
+
+#: templates/shop_form.html:94
+msgid "Cancel"
+msgstr "বাতিল"
+
+#: templates/shop_list.html:15
+msgid "Total"
+msgstr "মোট"
+
+#: templates/shop_list.html:15
+msgid "shops"
+msgstr "টি দোকান"
+
+#: templates/shop_list.html:24
+msgid "No"
+msgstr "নং"
+
+#: templates/shop_list.html:25
+msgid "Institution"
+msgstr "প্রতিষ্ঠান"
+
+#: templates/shop_list.html:74
+msgid "Previous"
+msgstr "আগের"
+
+#: templates/shop_list.html:77
+msgid "Page"
+msgstr "পৃষ্ঠা"
+
+#: templates/shop_list.html:79
+msgid "Next"
+msgstr "পরের"
+
+#: templates/shop_list.html:87
+msgid "Back to Home"
+msgstr "হোমে ফিরুন"
+

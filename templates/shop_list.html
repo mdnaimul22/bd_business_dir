@@ -9,10 +9,10 @@
         📂 {{ current_category.name }}
         <span class="subtitle">{{ current_category.name_english }}</span>
         {% else %}
-        🏪 সকল দোকান সমূহ
+        🏪 {{ _('All Shops') }}
         {% endif %}
     </h1>
-    <p>মোট {{ total }} টি দোকান</p>
+    <p>{{ _('Total') }} {{ total }} {{ _('shops') }}</p>
 </section>
 
 <section class="shops-section">
@@ -21,12 +21,12 @@
         <table class="shops-table">
             <thead>
                 <tr>
-                    <th>নং</th>
-                    <th>প্রতিষ্ঠান</th>
-                    <th>মালিক</th>
-                    <th>ঠিকানা</th>
-                    <th>মোবাইল</th>
-                    <th>ক্যাটেগরি</th>
+                    <th>{{ _('No') }}</th>
+                    <th>{{ _('Institution') }}</th>
+                    <th>{{ _('Proprietor') }}</th>
+                    <th>{{ _('Address') }}</th>
+                    <th>{{ _('Mobile') }}</th>
+                    <th>{{ _('Category') }}</th>
 
                 </tr>
             </thead>
@@ -71,20 +71,20 @@
     {% if total_pages > 1 %}
     <div class="pagination">
         {% if page > 1 %}
-        <a href="?page={{ page - 1 }}" class="page-link">← আগের</a>
+        <a href="?page={{ page - 1 }}" class="page-link">← {{ _('Previous') }}</a>
         {% endif %}
 
-        <span class="page-info">পৃষ্ঠা {{ page }} / {{ total_pages }}</span>
+        <span class="page-info">{{ _('Page') }} {{ page }} / {{ total_pages }}</span>
 
-        {% if page < total_pages %} <a href="?page={{ page + 1 }}" class="page-link">পরের →</a>
+        {% if page < total_pages %} <a href="?page={{ page + 1 }}" class="page-link">{{ _('Next') }} →</a>
             {% endif %}
     </div>
     {% endif %}
 
     {% else %}
     <div class="no-results">
-        <p>কোনো দোকান পাওয়া যায়নি।</p>
-        <a href="{{ url_for('index') }}" class="btn">হোমে ফিরুন</a>
+        <p>{{ _('No shops found.') }}</p>
+        <a href="{{ url_for('index') }}" class="btn">{{ _('Back to Home') }}</a>
     </div>
     {% endif %}
 </section>

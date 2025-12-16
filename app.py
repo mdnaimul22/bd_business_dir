@@ -3,15 +3,39 @@
 Flask Web Application for Shop Details
 """
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
-from database import ShopDatabase
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g
+from database import db, Shop, Category
+from sqlalchemy import or_
+from flask_babel import Babel, _
 import os
 
 app = Flask(__name__)
-app.secret_key = 'shop_details_secret_key_2024'
+# Secure secret key
+app.config['SECRET_KEY'] = 'dev-key-please-change'
+# Database configuration
+# Database configuration
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'shop_details.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize database
-db = ShopDatabase()
+# Babel configuration
+app.config['BABEL_DEFAULT_LOCALE'] = 'bn'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+
+def get_locale():
+    # Check if language is explicitly set in session (e.g. from toggle)
+    if 'lang' in session:
+        return session['lang']
+    # Otherwise try to match best language from request headers
+    return request.accept_languages.best_match(['bn', 'en'])
+
+babel = Babel(app, locale_selector=get_locale)
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 
 @app.context_processor
@@ -36,6 +60,12 @@ def parse_contact_info(value):
         return {'type': 'web', 'value': value}
         
     return {'type': 'text', 'value': value}
+
+@app.route('/set_lang/<lang_code>')
+def set_language(lang_code):
+    if lang_code in ['en', 'bn']:
+        session['lang'] = lang_code
+    return redirect(request.referrer or url_for('index'))
 
 @app.route('/')
 def index():

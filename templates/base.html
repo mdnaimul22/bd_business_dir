@@ -28,12 +28,19 @@
                 </a>
             </div>
             <div class="nav-links">
-                <a href="{{ url_for('index') }}" class="nav-link">হোম</a>
-                <a href="{{ url_for('shop_list') }}" class="nav-link">সকল দোকান</a>
+                <a href="{{ url_for('index') }}" class="nav-link">{{ _('Home') }}</a>
+                <a href="{{ url_for('shop_list') }}" class="nav-link">{{ _('All Shops') }}</a>
                 <a href="{{ url_for('add_shop') }}" class="nav-link btn-primary">
                     <span class="material-icons">add_circle</span>
-                    নতুন দোকান
+                    {{ _('New Shop') }}
                 </a>
+                <div class="lang-toggle">
+                    <a href="{{ url_for('set_language', lang_code='bn') }}"
+                        class="nav-link {% if session.get('lang', 'bn') == 'bn' %}active-lang{% endif %}">বাংলা</a>
+                    <span class="divider">|</span>
+                    <a href="{{ url_for('set_language', lang_code='en') }}"
+                        class="nav-link {% if session.get('lang') == 'en' %}active-lang{% endif %}">EN</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,7 +48,7 @@
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>ক্যাটেগরি সমূহ</h3>
+            <h3>{{ _('Categories') }}</h3>
             <button class="close-sidebar" id="closeSidebar">
                 <span class="material-icons">close</span>
             </button>
@@ -79,7 +86,8 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; ২০২৬ বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কসপ | সিটি বাইপাস, মোস্তফার মোড়, হরিন্টানা খুলনা</p>
+            <p>&copy; 2026 {{ _('Bangladesh Engineering Workshop') }} | {{ _('City Bypass, Mostofar Mor, Horintana
+                Khulna') }}</p>
         </div>
     </footer>
 
