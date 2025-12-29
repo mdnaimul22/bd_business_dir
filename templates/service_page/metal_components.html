@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Precision Metal Components - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="padding: 1rem;">
+    <h1 style="margin-bottom: 0.5rem;">Precision Metal Components</h1>
+    <span class="subtitle reference-text">
+        High Accuracy Manufacturing
+    </span>
+</section>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="service-container">
+        <!-- Main Content Area -->
+        <div class="service-content">
+            <img src="{{ url_for('static', filename='img/precision_parts.jpg') }}" alt="High precision metal components"
+                style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem;">
+
+            <h2 style="margin-bottom: 1.5rem;">Precision Manufacturing Services</h2>
+
+            <p class="service-description reference-text" style="margin-bottom: 1.5rem;">
+                Our facility is equipped with advanced milling and shaping machines to produce high-precision
+                metal components. We specialize in:
+            </p>
+
+            <h3 class="reference-text" style="margin-bottom: 1rem; font-weight: 400; color: #333333;">Our
+                Specializations:</h3>
+            <ul class="feature-list reference-text" style="padding-left: 2rem;">
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Industrial Flanges:</strong> Custom-bored and faced flanges for high-pressure piping
+                    systems.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Bearing Housings:</strong> Precision-machined housings ensuring perfect fit and alignment.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Gears & Sprockets:</strong> Custom gear cutting and tooth shaping for power transmission.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Bushings & Sleeves:</strong> Bronze, brass, and steel bushings machined to exact tolerances.
+                </li>
+            </ul>
+
+            <p class="reference-text" style="margin-top: 1.5rem; margin-bottom: 1rem;">
+                We ensure every component meets rigorous quality standards before leaving our workshop.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--background); padding: 1.5rem; border-radius: var(--radius);">
+        <h4 class="reference-text" style="margin-bottom: 0.5rem; font-weight: 400; color: #333333;">Need Urgent Help?
+        </h4>
+        <p class="reference-text" style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Our team is ready to assist with urgent manufacturing or repair needs.
+        </p>
+        <a href="#" class="btn btn-primary" style="width: 15%; text-align: center;">Contact Us</a>
+    </div>
+</div>
+
+{% endblock %}

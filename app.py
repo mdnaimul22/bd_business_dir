@@ -3,21 +3,34 @@
 Flask Web Application for Shop Details
 """
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_from_directory
 from database import db, Shop, Category
 from sqlalchemy import or_
 from flask_babel import Babel, _
 import os
+from werkzeug.utils import secure_filename
+import uuid
+
+# Configuration for file uploads
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'shop_img')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app = Flask(__name__)
 # Secure secret key
 app.config['SECRET_KEY'] = 'dev-key-please-change'
 # Database configuration
-# Database configuration
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'shop_details.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Ensure upload directory exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Babel configuration
 app.config['BABEL_DEFAULT_LOCALE'] = 'bn'
@@ -36,6 +49,16 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
+    # Auto-migrate: Add visiting_card column if it doesn't exist
+    from sqlalchemy import text
+    try:
+        with db.engine.connect() as conn:
+            conn.execute(text("SELECT visiting_card FROM shops LIMIT 1"))
+    except Exception:
+        with db.engine.connect() as conn:
+            conn.execute(text("ALTER TABLE shops ADD COLUMN visiting_card VARCHAR(5000)"))
+            conn.commit()
+            print("Migration: Added 'visiting_card' column to shops table.")
 
 
 @app.context_processor
@@ -60,6 +83,11 @@ def parse_contact_info(value):
         return {'type': 'web', 'value': value}
         
     return {'type': 'text', 'value': value}
+
+@app.route('/shop_img/<filename>')
+def shop_img(filename):
+    """Serve visiting card images from shop_img folder"""
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 @app.route('/set_lang/<lang_code>')
 def set_language(lang_code):
@@ -141,6 +169,16 @@ def add_shop():
     categories = db.get_all_categories()
     
     if request.method == 'POST':
+        # Handle file upload
+        visiting_card_filename = None
+        if 'visiting_card' in request.files:
+            file = request.files['visiting_card']
+            if file and file.filename and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                unique_filename = f"{uuid.uuid4()}_{filename}"
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], unique_filename))
+                visiting_card_filename = unique_filename
+
         category_id = request.form.get('category_id')
         new_category_name = request.form.get('new_category_name', '').strip()
         
@@ -163,7 +201,8 @@ def add_shop():
             'transaction_status': request.form.get('transaction_status', ''),
             'whatsapp': request.form.get('whatsapp', ''),
             'email_web': request.form.get('email_web', ''),
-            'products': request.form.get('products', '')
+            'products': request.form.get('products', ''),
+            'visiting_card': visiting_card_filename
         }
         
         if not shop_data['name']:
@@ -188,6 +227,16 @@ def edit_shop(shop_id):
     categories = db.get_all_categories()
     
     if request.method == 'POST':
+        # Handle file upload
+        visiting_card_filename = None
+        if 'visiting_card' in request.files:
+            file = request.files['visiting_card']
+            if file and file.filename and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                unique_filename = f"{uuid.uuid4()}_{filename}"
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], unique_filename))
+                visiting_card_filename = unique_filename
+
         category_id = request.form.get('category_id')
         new_category_name = request.form.get('new_category_name', '').strip()
         
@@ -212,6 +261,9 @@ def edit_shop(shop_id):
             'email_web': request.form.get('email_web', ''),
             'products': request.form.get('products', '')
         }
+
+        if visiting_card_filename:
+            shop_data['visiting_card'] = visiting_card_filename
         
         if not shop_data['name']:
             flash('প্রতিষ্ঠানের নাম আবশ্যক!', 'error')
@@ -226,7 +278,15 @@ def edit_shop(shop_id):
 
 @app.route('/shop/delete/<int:shop_id>', methods=['POST'])
 def delete_shop(shop_id):
-    """Delete a shop"""
+    """Delete a shop with password protection"""
+    # Password protection - change this password as needed
+    DELETE_PASSWORD = "admin123"
+    
+    submitted_password = request.form.get('delete_password', '')
+    if submitted_password != DELETE_PASSWORD:
+        flash('পাসওয়ার্ড ভুল! ডিলিট করা যায়নি।', 'error')
+        return redirect(url_for('shop_detail', shop_id=shop_id))
+    
     if db.delete_shop(shop_id):
         flash('দোকান সফলভাবে মুছে ফেলা হয়েছে!', 'success')
     else:
@@ -259,6 +319,29 @@ def api_shops():
         'page': page,
         'per_page': per_page
     })
+
+
+
+@app.route('/about-us')
+def about():
+    """About Us page"""
+    return render_template('about.html')
+
+
+@app.route('/our-services')
+def services():
+    """Services page"""
+    return render_template('services.html')
+
+@app.route('/services/<service_alias>')
+def service_detail(service_alias):
+    """Dynamic Service Detail Page"""
+    # Simply render the specific template for the requested service
+    try:
+        return render_template(f'service_page/{service_alias}.html')
+    except Exception:
+        # Fallback if template doesn't exist
+        return redirect(url_for('services'))
 
 
 if __name__ == '__main__':

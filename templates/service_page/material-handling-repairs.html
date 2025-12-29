@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Material Handling Repairs - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="padding: 1rem;">
+    <h1 style="margin-bottom: 0.5rem;">Material Handling Repairs</h1>
+    <span class="subtitle reference-text">
+        Conveyors, Forklifts & Industrial Systems
+    </span>
+</section>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="service-container">
+        <!-- Main Content Area -->
+        <div class="service-content">
+            <img src="{{ url_for('static', filename='img/material_handling.webp') }}"
+                alt="Forklifts and conveyor systems under maintenance"
+                style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem;">
+
+            <h2 style="margin-bottom: 1.5rem;">Material Handling Solutions</h2>
+
+            <p class="service-description reference-text" style="margin-bottom: 1.5rem;">
+                From forklifts to conveyor systems, we keep your logistics and production lines moving.
+                Our team ensures all material handling equipment operates safely and efficiently.
+            </p>
+
+            <h3 class="reference-text" style="font-weight: 400; color: #333333; margin-bottom: 1rem;">Equipment We
+                Service:</h3>
+            <ul class="feature-list reference-text" style="padding-left: 2rem;">
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Forklifts & Reach Stackers:</strong> Regular safety checks and hydraulic repairs for lifting
+                    equipment.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Conveyor Systems:</strong> Manufacturing and repairing rollers, drive shafts, and pulleys.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Container Handlers:</strong> Heavy-duty maintenance for port and yard equipment.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Custom Components:</strong> Fabrication of specialized replacement parts for material
+                    handling systems.
+                </li>
+            </ul>
+
+            <p class="reference-text" style="margin-top: 1.5rem; margin-bottom: 1rem;">
+                Regular maintenance is crucial for safety and productivity in high-load environments.
+                We ensure your equipment remains reliable and compliant.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--background); padding: 1.5rem; border-radius: var(--radius);">
+        <h4 class="reference-text" style="margin-bottom: 0.5rem; font-weight: 400; color: #333333;">Need Urgent Help?
+        </h4>
+        <p class="reference-text" style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Our team is ready to assist with breakdowns and emergency maintenance.
+        </p>
+        <a href="#" class="btn btn-primary" style="width: 15%; text-align: center;">Contact Us</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -60,7 +60,8 @@ class ExtendedSQLAlchemy(SQLAlchemy):
             transaction_status=data.get('transaction_status'),
             whatsapp=data.get('whatsapp'),
             email_web=data.get('email_web'),
-            products=data.get('products')
+            products=data.get('products'),
+            visiting_card=data.get('visiting_card')
         )
         self.session.add(new_shop)
         self.session.commit()
@@ -81,6 +82,8 @@ class ExtendedSQLAlchemy(SQLAlchemy):
         shop.whatsapp = data.get('whatsapp')
         shop.email_web = data.get('email_web')
         shop.products = data.get('products')
+        if 'visiting_card' in data:
+            shop.visiting_card = data.get('visiting_card')
         shop.updated_at = datetime.datetime.now()
         
         self.session.commit()
@@ -168,6 +171,7 @@ class Shop(db.Model):
     whatsapp = db.Column(db.String(5000))
     email_web = db.Column(db.String(10000))
     products = db.Column(db.Text)
+    visiting_card = db.Column(db.String(5000))
     created_at = db.Column(db.DateTime, default=datetime.datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
@@ -186,6 +190,7 @@ class Shop(db.Model):
             'whatsapp': self.whatsapp,
             'email_web': self.email_web,
             'products': self.products,
+            'visiting_card': self.visiting_card,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }

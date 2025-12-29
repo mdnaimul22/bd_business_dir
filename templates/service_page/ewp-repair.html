@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}EWP Repair - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="padding: 1rem;">
+    <h1 style="margin-bottom: 0.5rem;">EWP Repair</h1>
+    <span class="subtitle reference-text">
+        EWP Access Repair & Maintenance
+    </span>
+</section>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="service-container">
+        <!-- Main Content Area -->
+        <div class="service-content">
+            <img src="{{ url_for('static', filename='img/ewp_small.png') }}" alt="ewp access platform maintenance"
+                style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem;">
+
+            <h2 style="margin-bottom: 1rem;">Ewp Access platform maintenance Khulna</h2>
+
+            <p class="service-description reference-text" style="margin-bottom: 1.5rem;">
+                Is your access platform due for maintenance or repairs? Regular maintenance of your access platform is
+                essential to ensuring its longevity, productivity and workplace safety. Whatever your EWP needs to
+                continue running smoothly – servicing, maintenance or repairs – BEW™ can help you.
+            </p>
+
+            <h3 class="reference-text" style="font-weight: 400; color: #333333; margin-bottom: 1rem;">Our EWP & Elevated
+                Access Repair Services:</h3>
+            <ul class="feature-list reference-text" style="padding-left: 2rem;">
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Regular Maintenance:</strong> Detailed inspections including tyres, engine oil, greasing,
+                    filter replacement, and diagnostic checks.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Major Service:</strong> All kinds of work - break, suspension, chassis, hydraulic, new parts
+                    making, lathe work, milling and shapping, gear cutting etc.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Emergency Repairs:</strong> Quick diagnosis and repair for breakdowns to get you back as
+                    soon as possible.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Chassis & Axle Work:</strong> Structural repairs, chassis straightening, and axle alignment.
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--background); padding: 1.5rem; border-radius: var(--radius);">
+        <h4 class="reference-text" style="margin-bottom: 0.5rem; font-weight: 400; color: #333333;">Need Urgent Help?
+        </h4>
+        <p class="reference-text" style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Our extensive industry knowledge and expertise across all major brands and models, we offer reliable and
+            cost-effective EWP maintenance, inspections, and repairs.
+        </p>
+        <a href="#" class="btn btn-primary" style="width: 15%; text-align: center;">Contact Us</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Crane Repair & Maintenance - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="padding: 1rem;">
+    <h1 style="margin-bottom: 0.5rem;">Crane Repair & Maintenance</h1>
+    <span class="subtitle reference-text">
+        Hydraulic & Structural Crane Services
+    </span>
+</section>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="service-container">
+        <!-- Main Content Area -->
+        <div class="service-content">
+            <img src="{{ url_for('static', filename='img/crane_repair.webp') }}" alt="Hydraulic crane under maintenance"
+                style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem;">
+
+            <h2 style="margin-bottom: 1rem;">Crane Maintenance</h2>
+
+            <p class="service-description reference-text" style="margin-bottom: 1.5rem;">
+                Minimise machine failure and keep your crane in tip-top condition with our professional services.
+            </p>
+
+            <h3 class="reference-text" style="font-weight: 400; color: #333333; margin-bottom: 1rem;">Core Crane
+                Services:</h3>
+            <ul class="feature-list reference-text" style="padding-left: 2rem;">
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Scheduled Maintenance:</strong> Regular servicing to prevent unwanted project delays.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Rail Alignment & Load Testing:</strong> Ensuring safe lifting capacity and stability.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Boom & Cylinder Repairs:</strong> Expert machining and hydraulic cylinder repair for
+                    telescopic booms.
+                </li>
+                <li style="margin-bottom: 0.5rem;">
+                    <strong>Major Inspections:</strong> Detailed compliance checks meeting safety standards (10-year
+                    inspections).
+                </li>
+            </ul>
+
+            <h3 class="reference-text" style="font-weight: 400; color: #333333; margin-top: 2rem; margin-bottom: 1rem;">
+                EWP & Access Equipment</h3>
+            <p class="reference-text" style="margin-bottom: 1rem;">
+                We also service elevated work platforms (EWPs) and scissor lifts, ensuring safety, reliability,
+                and compliance for all access equipment.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--background); padding: 1.5rem; border-radius: var(--radius);">
+        <h4 class="reference-text" style="margin-bottom: 0.5rem; font-weight: 400; color: #333333;">Need Urgent Help?
+        </h4>
+        <p class="reference-text" style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Our team is ready to assist with breakdowns and emergency crane maintenance.
+        </p>
+        <a href="#" class="btn btn-primary" style="width: 15%; text-align: center;">Contact Us</a>
+    </div>
+</div>
+
+{% endblock %}

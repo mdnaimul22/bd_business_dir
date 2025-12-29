@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Services - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="text-align: center; padding: 1rem 1rem;">
+    <h1 style="color: #F25738; margin-bottom: 0.2rem;">Our Services & Expertise</h1>
+    <span class="subtitle">Specialized Engineering & Manufacturing Services</span>
+</section>
+
+<section class="container services-redesign" style="margin-top: 2rem;">
+    <!-- Section 1: Metal Components (Text Left, Image Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>Precision Metal Components</h2>
+            <p class="reference-text">Our facility is equipped with advanced milling and shaping machines to produce
+                high-precision metal components. We ensure every component meets rigorous quality standards before
+                leaving our workshop.</p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Industrial Flanges:</strong> Custom-bored and faced flanges for high-pressure piping
+                    systems.</li>
+                <li><strong>Bearing Housings:</strong> Precision-machined housings ensuring perfect fit and alignment.
+                </li>
+                <li><strong>Gears & Sprockets:</strong> Custom gear cutting and tooth shaping for power transmission.
+                </li>
+                <li><strong>Bushings & Sleeves:</strong> Bronze, brass, and steel machined to exact tolerances.</li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/precision_parts.jpg') }}" alt="Precision Metal Components">
+        </div>
+    </div>
+
+    <!-- Section 2: Heavy Engineering (Image Left, Text Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>Heavy Engineering</h2>
+            <p class="reference-text">We maintain one of the largest lathe capacities in the region, capable of handling
+                oversized industrial components. Specialized in heavy-duty lathe work for large scale industrial rollers
+                and shafts.</p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Long Shaft Works:</strong> Capacity up to 12 feet (3657.6 mm) with 32-inch diameter.</li>
+                <li><strong>Large Diameter Face Works:</strong> Turning components with outer diameter up to 1470 mm.
+                </li>
+                <li><strong>Industrial Rollers:</strong> Ideal for maritime shafts, textile rollers, and flywheels.</li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/lathe_work.jpg') }}" alt="Heavy Engineering Lathe Work">
+        </div>
+    </div>
+
+    <!-- Section 3: Truck Repair (Text Left, Image Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>Truck Repair Services</h2>
+            <p class="reference-text">Staying one step ahead of repairs is essential to keeping your fleet operational.
+                We offer expert maintenance and repair services for all heavy trucks, ensuring safety, reliability, and
+                longevity.</p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Regular Maintenance:</strong> Detailed inspections, oil changes, and diagnostic checks.</li>
+                <li><strong>Major Service:</strong> Brake/clutch fluid replacement and full engine overhauls.</li>
+                <li><strong>Chassis & Axle:</strong> Structural repairs, straightening, and precision alignment.</li>
+                <li><strong>Emergency Support:</strong> Quick diagnosis and mobile mechanics for breakdowns.</li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/truck_repair_logo.svg') }}" alt="Heavy Truck Repair">
+        </div>
+    </div>
+
+    <!-- Section 4: Crane Repair (Image Left, Text Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>Crane Repair & Maintenance</h2>
+            <p class="reference-text">Minimise machine failure and keep your crane in tip-top condition with our
+                professional structural and hydraulic services. We ensure compliance with the highest safety standards.
+            </p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Hydraulic Systems:</strong> Boom and cylinder repairs and expert machining.</li>
+                <li><strong>Load Testing:</strong> Rail alignment and stability testing for safe lifting.</li>
+                <li><strong>Major Inspections:</strong> Detailed 10-year compliance and safety checks.</li>
+                <li><strong>Access Equipment:</strong> Maintenance for EWP access platforms and scissor lifts.</li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/crane_repair_small2.png') }}"
+                alt="Crane Repair and Maintenance">
+        </div>
+    </div>
+
+    <!-- Section 5: Earthmoving Repair (Text Left, Image Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>Earthmoving Equipment Repair</h2>
+            <p class="reference-text">Complete maintenance solutions for excavators, dozers, and heavy earthmoving
+                machinery. Our specialist mechanics keep your business-critical equipment and projects running
+                efficiently.</p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Engine Rebuilds:</strong> Diesel engine repairs and overhauls for heavy equipment.</li>
+                <li><strong>Structural Repair:</strong> Bucket and boom welding, line-boring, and reinforcement.</li>
+                <li><strong>Undercarriage:</strong> Repairing rollers, idlers, and track chains for all major brands.
+                </li>
+                <li><strong>On-site Support:</strong> Mobile repair services for optimum efficiency.</li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/earthmover_small.png') }}" alt="Earthmoving Equipment Repair">
+        </div>
+    </div>
+
+    <!-- Section 6: Material Handling (Image Left, Text Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>Material Handling Repairs</h2>
+            <p class="reference-text">From forklifts to conveyor systems, we keep your logistics and production lines
+                moving. We ensure all material handling equipment operates safely and reliably in high-load
+                environments.</p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Conveyor Systems:</strong> Manufacturing and repairing rollers, shafts, and pulleys.</li>
+                <li><strong>Lifting Equipment:</strong> Hydraulic repairs and safety checks for forklifts and reach
+                    stackers.</li>
+                <li><strong>Port Equipment:</strong> Heavy-duty maintenance for container handlers and yard assets.</li>
+                <li><strong>Custom Parts:</strong> Fabrication of specialized replacement components.</li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/forklift_small.png') }}" alt="Material Handling Systems">
+        </div>
+    </div>
+
+    <!-- Section 7: EWP Repair (Text Left, Image Right) -->
+    <div class="service-section-alt">
+        <div class="service-text">
+            <h2>EWP Access Repair & Maintenance</h2>
+            <p class="reference-text">Regular maintenance of your elevated work platforms is essential to ensuring
+                longevity, productivity, and workplace safety. BEW™ helps you keep access machinery running smoothly.
+            </p>
+            <ul class="feature-list reference-text" style="padding-left: 1.5rem;">
+                <li><strong>Access Platforms:</strong> Detailed inspections, greasing, and diagnostic checks.</li>
+                <li><strong>Technical Overhauls:</strong> Hydraulic, brake, and chassis work for all major brands.</li>
+                <li><strong>Emergency Diagnostics:</strong> Quick repair for breakdowns to minimize downtime.</li>
+                <li><strong>Replacement Parts:</strong> Custom lathe and milling work for specialized EWP components.
+                </li>
+            </ul>
+        </div>
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='img/ewp_small.png') }}" alt="EWP Access Platform Repair">
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin-bottom: 4rem;">
+    <div
+        style="background: var(--background); padding: 2.5rem; border-radius: 12px; text-align: center; border: 1px solid #eee;">
+        <h3 class="reference-text" style="margin-bottom: 1rem; font-weight: 400; color: #333333; font-size: 24px;">Need
+            Professional Engineering Support?</h3>
+        <p class="reference-text" style="margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Our team of expert mechanics and engineers is ready to assist with your most challenging projects, from
+            precision manufacturing to heavy vehicle maintenance.</p>
+        <a href="tel:+8801906399161" class="btn btn-primary" style="padding: 12px 40px; font-size: 16px;">Call
+            Our Workshop Today</a>
+    </div>
+</div>
+{% endblock %}

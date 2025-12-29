@@ -5,7 +5,7 @@ _('Bangladesh Engineering Workshop') }}{% endblock %}
 
 {% block content %}
 <section class="shop-form-section">
-    <h1>
+    <h1 style="margin-bottom: 1.5rem;">
         {% if action == 'add' %}
         ➕ {{ _('Add New Shop') }}
         {% else %}
@@ -13,77 +13,110 @@ _('Bangladesh Engineering Workshop') }}{% endblock %}
         {% endif %}
     </h1>
 
-    <form method="POST" class="shop-form">
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label for="category_id">📂 {{ _('Category') }}</label>
-                <div class="category-input-group">
-                    <select name="category_id" id="category_id" class="form-control">
-                        <option value="">-- {{ _('Select Category') }} --</option>
-                        {% for cat in categories %}
-                        <option value="{{ cat.id }}" {% if shop.category_id==cat.id %}selected{% endif %}>
-                            {{ cat.name }} ({{ cat.name_english }})
-                        </option>
-                        {% endfor %}
-                        <option value="new">+ {{ _('Add New Category') }}</option>
-                    </select>
-                    <input type="text" name="new_category_name" id="new_category_name" class="form-control"
-                        placeholder="{{ _('Enter new category name') }}" style="display: none;">
-                </div>
-            </div>
+    <form method="POST" class="shop-form" enctype="multipart/form-data">
 
-            <!-- Serial No removed as per request -->
-
-            <div class="form-group full-width">
-                <label for="name">🏪 {{ _('Shop Name') }} <span class="required">*</span></label>
+        <!-- Row 1: Shop Name & Visiting Card Section -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <!-- Left: Shop Name -->
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="name">🏪 {{ _('Shop Name') }}</label>
                 <input type="text" name="name" id="name" class="form-control" required value="{{ shop.name or '' }}"
                     placeholder="{{ _('Enter shop name') }}">
             </div>
 
-            <div class="form-group">
+            <!-- Right: Visiting Card with Preview -->
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div class="form-group" style="flex: 0 0 160px; margin-bottom: 0;">
+                    <label for="visiting_card" style="font-size: 0.8rem;">🖼️ Visiting Card</label>
+                    <input type="file" name="visiting_card" id="visiting_card" class="form-control" accept="image/*"
+                        onchange="previewImage(this)" style="font-size: 0.75rem; padding: 0.35rem 0.5rem;">
+                </div>
+                <div id="imagePreview"
+                    style="width: 250px; height: 120px; background: #f5f5f5; border-radius: 6px; border: 2px dashed #ddd; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; margin-top: -50px;">
+                    {% if shop.visiting_card %}
+                    <img src="/shop_img/{{ shop.visiting_card }}" alt="Current Card"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    {% else %}
+                    <span style="color: #999; font-size: 10px;">প্রিভিউ</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Proprietor & Category -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="proprietor">👤 {{ _('Proprietor') }}</label>
                 <input type="text" name="proprietor" id="proprietor" class="form-control"
                     value="{{ shop.proprietor or '' }}" placeholder="{{ _('Proprietor Name') }}">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="category_id">📂 {{ _('Category') }}</label>
+                <select name="category_id" id="category_id" class="form-control">
+                    <option value="">-- {{ _('Select Category') }} --</option>
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if shop.category_id==cat.id %}selected{% endif %}>
+                        {{ cat.name }} ({{ cat.name_english }})
+                    </option>
+                    {% endfor %}
+                    <option value="new">+ {{ _('Add New Category') }}</option>
+                </select>
+                <input type="text" name="new_category_name" id="new_category_name" class="form-control"
+                    placeholder="{{ _('Enter new category name') }}" style="display: none; margin-top: 0.5rem;">
+            </div>
+        </div>
+
+        <!-- Row 3: Address & Mobile -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="address">📍 {{ _('Address') }}</label>
                 <input type="text" name="address" id="address" class="form-control" value="{{ shop.address or '' }}"
                     placeholder="{{ _('Shop Address') }}">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="mobile">📱 {{ _('Mobile') }}</label>
                 <input type="text" name="mobile" id="mobile" class="form-control" value="{{ shop.mobile or '' }}"
                     placeholder="{{ _('e.g. 017XX-XXXXXX') }}">
             </div>
+        </div>
 
-            <div class="form-group">
+        <!-- Row 4: WhatsApp & Online Transaction -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="whatsapp">💬 {{ _('WhatsApp') }}</label>
                 <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ shop.whatsapp or '' }}"
                     placeholder="{{ _('WhatsApp Number') }}">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="transaction_status">💰 {{ _('Online Transaction') }}</label>
                 <input type="text" name="transaction_status" id="transaction_status" class="form-control"
                     value="{{ shop.transaction_status or '' }}" placeholder="{{ _('e.g. Bkash 018XX-XXXXXX') }}">
             </div>
+        </div>
 
-            <div class="form-group">
+        <!-- Row 5: Email/Web (Full Width) -->
+        <div style="margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="email_web">📧 {{ _('Email/Web') }}</label>
                 <input type="text" name="email_web" id="email_web" class="form-control"
                     value="{{ shop.email_web or '' }}" placeholder="{{ _('Email or Website') }}">
             </div>
+        </div>
 
-            <div class="form-group full-width">
+        <!-- Row 6: Products List (Full Width) -->
+        <div style="margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom: 0;">
                 <label for="products">📦 {{ _('Products List') }}</label>
                 <textarea name="products" id="products" class="form-control" rows="4"
                     placeholder="{{ _('Products available in this shop...') }}">{{ shop.products or '' }}</textarea>
             </div>
         </div>
 
-        <div class="form-actions">
+        <!-- Submit Buttons -->
+        <div class="form-actions" style="margin-top: 1rem;">
             <button type="submit" class="btn btn-primary btn-lg">
                 {% if action == 'add' %}
                 ➕ {{ _('Add Shop') }}
@@ -95,4 +128,28 @@ _('Bangladesh Engineering Workshop') }}{% endblock %}
         </div>
     </form>
 </section>
+
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Handle new category input
+    document.getElementById('category_id').addEventListener('change', function () {
+        var newCatInput = document.getElementById('new_category_name');
+        if (this.value === 'new') {
+            newCatInput.style.display = 'block';
+            newCatInput.focus();
+        } else {
+            newCatInput.style.display = 'none';
+        }
+    });
+</script>
 {% endblock %}

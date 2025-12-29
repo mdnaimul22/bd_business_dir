@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Earthmoving Repair & Maintenance - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="padding: 1rem;">
+    <h1>Earthmoving Equipment Repair</h1>
+    <span class="subtitle reference-text">Complete Maintenance Solutions for Excavators & Dozers</span>
+</section>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="service-container">
+        <!-- Main Content Area -->
+        <div class="service-content">
+            <img src="{{ url_for('static', filename='img/earthmoving.webp') }}" alt="Earthmoving Repair"
+                style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem;">
+
+            <h2 style="margin-bottom: 1.5rem;">Earthmoving Repair & Maintenance Services</h2>
+            <p class="reference-text" style="margin-bottom: 1.5rem;">
+                Bangladesh Engineering Workshop BEW™ understands how important it is to have your essential
+                earthmoving equipment maintained and ready to support your projects, large or small. Our team includes
+                earthmoving mechanics and specialist digger mechanics experienced in providing crucial earthmoving
+                equipment
+                repairs, maintenance and excavator breakdown services to keep your business-critical machinery up and
+                running. What’s more, our earthmoving equipment repair services can come to you for optimum efficiency
+                and affordability.
+            </p>
+
+            <h3 class="reference-text" style="font-weight: 400; color: #333333; margin-top: 2rem; margin-bottom: 1rem;">
+                Our BEW™ earthmoving services:</h3>
+            <ul class="feature-list reference-text" style="padding-left: 2rem;">
+                <li style="margin-bottom: 0.5rem;"><strong>Complete Engine Rebuilds:</strong> Diesel engine repairs and
+                    overhauls for excavators and dozers.</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Bucket & Boom Repair:</strong> Welding, line-boring, and
+                    structural reinforcement for wear parts.</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Track & Undercarriage:</strong> Repairing rollers, idlers,
+                    and track chains.</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Hydraulic Systems:</strong> Pump/motor testing and cylinder
+                    resealing.</li>
+                <li style="margin-bottom: 0.5rem;"><strong>Mobile Repairs:</strong> On-site breakdown support to get you
+                    moving again.</li>
+            </ul>
+
+            <h3 class="reference-text" style="font-weight: 400; color: #333333; margin-top: 2rem; margin-bottom: 1rem;">
+                Major Service & Overhauls</h3>
+            <p class="reference-text" style="margin-bottom: 1.5rem;">
+                Over time, heavy construction machines need more than a regular service. Our major service includes
+                detailed diagnostics, technical spec updates, and component upgrades. We service all major brands
+                including CAT, Komatsu, and Hitachi.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--background); padding: 1.5rem; border-radius: var(--radius);">
+        <h4 class="reference-text" style="margin-bottom: 0.5rem; font-weight: 400; color: #333333;">Need Urgent Help?
+        </h4>
+        <p class="reference-text" style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Our team is ready to assist with breakdowns and emergency maintenance.
+        </p>
+        <a href="#" class="btn btn-primary" style="width: 15%; text-align: center;">Contact Us</a>
+    </div>
+</div>
+{% endblock %}

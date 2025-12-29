@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কশপ{% endblock %}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/logo.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@300;400;700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -23,12 +25,23 @@
                     <span class="material-icons">menu</span>
                 </button>
                 <a href="{{ url_for('index') }}" class="logo">
-                    <span class="material-icons logo-icon">storefront</span>
+                    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="BW Logo"
+                        style="height: 85px; width: auto;">
                     বাংলাদেশ ইঞ্জিনিয়ারিং ওয়ার্কসপ
                 </a>
             </div>
+
+            <div class="nav-center"
+                style="display: flex; align-items: center; gap: 0.0rem; color: var(--primary); font-weight: 600;">
+                <span class="material-icons">call</span>
+                <span style="font-family: 'Noto Sans', sans-serif;">+880 1906399161</span>
+            </div>
             <div class="nav-links">
                 <a href="{{ url_for('index') }}" class="nav-link">{{ _('Home') }}</a>
+                <a href="{{ url_for('about') }}" class="nav-link">{{ _('About') }}</a>
+
+                <a href="{{ url_for('services') }}" class="nav-link">{{ _('Our Services') }}</a>
+
                 <a href="{{ url_for('shop_list') }}" class="nav-link">{{ _('All Shops') }}</a>
                 <a href="{{ url_for('add_shop') }}" class="nav-link btn-primary">
                     <span class="material-icons">add_circle</span>

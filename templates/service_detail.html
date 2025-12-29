@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ service.title }} - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>{{ service.title }}</h1>
+    <span class="subtitle">{{ service.subtitle }}</span>
+</section>
+
+<section class="shop-detail">
+    <div class="shop-detail-body">
+        <div class="detail-card full-width">
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;">
+                {% if service.image %}
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="{{ url_for('static', filename=service.image) }}" alt="{{ service.title }}"
+                        style="width: 100%; border-radius: 8px; box-shadow: var(--shadow);">
+                </div>
+                {% endif %}
+                <div style="flex: 1; min-width: 300px;">
+                    {{ service.content | safe }}
+                </div>
+            </div>
+
+            <div class="shop-actions" style="justify-content: center; margin-top: 2rem;">
+                <a href="{{ url_for('services') }}" class="btn btn-secondary">Back to All Services</a>
+                <!-- <a href="#" class="btn btn-primary">Contact Us for Quote</a> -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

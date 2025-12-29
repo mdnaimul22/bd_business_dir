@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+
+
+<!-- Hero Image -->
+<div style="margin-bottom: 2rem;">
+    <img src="{{ url_for('static', filename='img/about_hero.png') }}" alt="Heavy Equipment Specialists"
+        style="width: 100%; border-radius: var(--radius); box-shadow: var(--shadow);">
+</div>
+
+<div class="shop-detail-body">
+    <div class="detail-card full-width" style="box-shadow: none; border: none; background: transparent;">
+        <h1 style="text-align: center; margin-bottom: 2rem;">Reliable Heavy Construction Machinery Repair & Maintenance
+            Service</h1>
+        <p class="reference-text" style="text-align: center; max-width: 950px; margin: 0 auto 2rem auto;">Bangladesh
+            Engineering Workshop is a premier hub for heavy equipment service, maintenance-repairs and
+            engineering solutions for the
+            country's mechanical sector. Our specialist
+            heavy equipment mechanics are professionally trained to provide all the support you need to keep your large
+            machinery up and running for longer.</p>
+    </div>
+
+    <div class="detail-card full-width"
+        style="box-shadow: none; border: none; background: transparent; padding-top: 0;">
+        <h2 style="text-align: center; margin-bottom: 1.5rem;">Our Specialist Services</h2>
+
+        <p class="reference-text" style="text-align: center; max-width: 950px; margin: 0 auto 2.5rem auto;">From
+            proactive maintenance, inspections and servicing to repairs, new parts and breakdown recovery, BEW™ heavy
+            machinery services keep your large equipment and your project teams in business.</p>
+
+        <div class="service-box-container">
+            <!-- Box 1: Heavy Engineering -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/lathe_logo.svg') }}" alt="Heavy Engineering">
+                <h3>Heavy Engineering</h3>
+                <p>Specialized lathe and machining works. Capacity up to 12 feet length and 32 inches diameter for
+                    industrial rollers and shafts.</p>
+                <a href="{{ url_for('service_detail', service_alias='heavy_engineering') }}" class="btn-orange">Learn
+                    More</a>
+            </div>
+
+            <!-- Box 2: Metal Components -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/gear.svg') }}" alt="Metal Components">
+                <h3>Metal Components</h3>
+                <p>Precision milling and shaping for high-accuracy manufacturing of flanges, bearing housings, and
+                    custom gears.</p>
+                <a href="{{ url_for('service_detail', service_alias='metal_components') }}" class="btn-orange">Learn
+                    More</a>
+            </div>
+
+            <!-- Box 3: Truck Repair -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/truck_repair_logo.svg') }}" alt="Truck Repair">
+                <h3>Truck Repair</h3>
+                <p>Comprehensive fleet maintenance, engine rebuilds, and chassis work for heavy trucks and transport
+                    vehicles.</p>
+                <a href="{{ url_for('service_detail', service_alias='truck-repair') }}" class="btn-orange">Learn
+                    More</a>
+            </div>
+
+            <!-- Box 4: Crane Repair -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/crane_repair_small2.png') }}" alt="Crane Repair">
+                <h3>Crane Repair</h3>
+                <p>Hydraulic and structural crane services, including rail alignment, load testing, and major
+                    inspections.</p>
+                <a href="{{ url_for('service_detail', service_alias='crane-repair-and-maintenance') }}"
+                    class="btn-orange">Learn More</a>
+            </div>
+
+            <!-- Box 5: Earthmoving Repair -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/earthmover_small.png') }}" alt="Earthmoving Repair">
+                <h3>Earthmoving Repair</h3>
+                <p>Expert maintenance for excavators and dozers, including bucket repair, hydraulic testing, and track
+                    work.</p>
+                <a href="{{ url_for('service_detail', service_alias='earthmoving-repair') }}" class="btn-orange">Learn
+                    More</a>
+            </div>
+
+            <!-- Box 6: Material Handling -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/forklift_small.png') }}" alt="Material Handling">
+                <h3>Material Handling</h3>
+                <p>Repairs for conveyors, forklifts, and industrial systems to ensure safety and productivity in
+                    manufacturing.</p>
+                <a href="{{ url_for('service_detail', service_alias='material-handling-repairs') }}"
+                    class="btn-orange">Learn More</a>
+            </div>
+            <!-- Box 7: EWP Repair -->
+            <div class="service-box">
+                <img src="{{ url_for('static', filename='img/ewp_small.png') }}" alt="EWP Repair">
+                <h3>EWP Repair</h3>
+                <p>EWP access platform maintenance, inspections, and repairs for ensuring longevity, productivity and
+                    workplace safety.</p>
+                <a href="{{ url_for('service_detail', service_alias='ewp-repair') }}" class="btn-orange">Learn More</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="detail-grid" style="margin-top: 0.0rem;">
+        <div class="detail-card">
+            <div style="display: flex; align-items: center; gap: 0.2rem; margin-bottom: 0.2rem;">
+                <img src="{{ url_for('static', filename='img/capabilitie.svg') }}" alt="Capabilities"
+                    style="height: 60px; width: auto;">
+                <h3 class="reference-text" style="margin-bottom: 0; font-weight: 400; color: #333333;">Core Capabilities
+                </h3>
+            </div>
+            <ul class="reference-text" style="padding-left: 2rem; list-style-position: inside;">
+                <li><strong>Turning & Machining:</strong> Large capacity lathe work for rollers and shafts.</li>
+                <li><strong>Milling & Shaping:</strong> Precision gear cutting and shaping.</li>
+                <li><strong>Fabrication:</strong> Custom welding and diverse metal structures.</li>
+                <li><strong>Spare Parts:</strong> Production of couplings, pulleys, and specialized mounts.</li>
+            </ul>
+        </div>
+
+        <div class="detail-card">
+            <div style="display: flex; align-items: center; gap: 0.2rem; margin-bottom: 0.2rem;">
+                <img src="{{ url_for('static', filename='img/vision.svg') }}" alt="Vision"
+                    style="height: 60px; width: auto;">
+                <h3 class="reference-text" style="margin-bottom: 0; font-weight: 400; color: #333333;">Our Vision</h3>
+            </div>
+            <p class="reference-text" style="padding-left: 2rem; list-style-position: inside;">To become the leading
+                name in industrial engineering services and the most trusted digital platform
+                for the mechanical workshop community in Bangladesh.</p>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}

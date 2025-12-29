@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Heavy Engineering - Bangladesh Engineering Workshop{% endblock %}
+
+{% block content %}
+<section class="page-header" style="padding: 1rem;">
+    <h1 style="margin-bottom: 0.5rem;">Heavy Engineering</h1>
+    <span class="subtitle reference-text">
+        Specialized Lathe & Machining Works
+    </span>
+</section>
+
+<div class="container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="service-container">
+        <!-- Main Content Area -->
+        <div class="service-content">
+            <img src="{{ url_for('static', filename='img/lathe_work.jpg') }}"
+                alt="Heavy lathe work and large industrial components"
+                style="width: 100%; height: 350px; object-fit: cover; border-radius: var(--radius); margin-bottom: 2rem;">
+
+            <h2 style="margin-bottom: 1.5rem;">Machine Capacity & Technical Specifications</h2>
+
+            <p class="service-description reference-text" style="margin-bottom: 1.5rem;">
+                We maintain one of the largest lathe capacities in the region, capable of handling oversized
+                industrial components.
+            </p>
+
+            <h3 class="reference-text" style="margin-bottom: 1rem; font-weight: 400; color: #333333;">Long Shaft &
+                Roller Works</h3>
+            <p class="reference-text" style="margin-bottom: 1.5rem;">
+                For long workpieces up to <strong>12 feet (3657.6 mm)</strong>, we can accommodate a maximum
+                outer diameter of <strong>32 inches (812.8 mm)</strong>. This is ideal for large industrial
+                rollers, maritime shafts, and textile rollers.
+            </p>
+
+            <h3 class="reference-text" style="margin-bottom: 1rem; font-weight: 400; color: #333333;">Large Diameter
+                Face Works</h3>
+            <p class="reference-text" style="margin-bottom: 1.5rem;">
+                For shorter workpieces (length 450-500 mm), our faceplate capacity allows us to turn components
+                with an <strong>outer diameter up to 1470 mm</strong>. This capability is perfect for large
+                flanges, flywheels, and heavy gears.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--background); padding: 1.5rem; border-radius: var(--radius);">
+        <h4 class="reference-text" style="margin-bottom: 0.5rem; font-weight: 400; color: #333333;">Need Urgent Help?
+        </h4>
+        <p class="reference-text" style="font-size: 0.9rem; margin-bottom: 1rem;">
+            Our team is ready to assist with urgent heavy engineering projects and lathe work.
+        </p>
+        <a href="#" class="btn btn-primary" style="width: 15%; text-align: center;">Contact Us</a>
+    </div>
+</div>
+
+{% endblock %}
