@@ -53,6 +53,8 @@
                 </div>
             </div>
 
+
+
             <!-- Contact Info Card (Second - moved from third position) -->
             <div class="detail-card">
                 <h3>📞 যোগাযোগ</h3>
@@ -133,6 +135,8 @@
     </div>
 
     <script>
+        const SHOP_ID = {{ shop.id }};
+
         function checkDeletePassword() {
             var password = prompt("ডিলিট করতে পাসওয়ার্ড দিন:");
             if (password === null) {
@@ -141,6 +145,8 @@
             document.getElementById('delete_password_field').value = password;
             return true;
         }
+
+
     </script>
 </section>
 {% endblock %}

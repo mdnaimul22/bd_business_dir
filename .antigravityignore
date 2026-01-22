@@ -1,0 +1,15 @@
+node_modules/
+public/assets/
+**/*.min.js
+dist/
+.next/
+build/
+package-lock.json
+yarn.lock
+__pycache__
+babel.cfg
+translations
+shop_img
+uploads
+messages.pot
+python/classifire

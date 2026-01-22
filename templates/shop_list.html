@@ -27,7 +27,7 @@
                     <th>{{ _('Address') }}</th>
                     <th>{{ _('Mobile') }}</th>
                     <th>{{ _('Category') }}</th>
-
+                    <th>{{ _('Tags') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +61,21 @@
                         -
                         {% endif %}
                     </td>
-
+                    <td>
+                        {% if shop.tags %}
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">
+                            {% for tag in shop.tags %}
+                            <a href="{{ url_for('search_by_tag', tag_name=tag.name) }}"
+                                style="display: inline-block; padding: 0.15rem 0.5rem; font-size: 0.75rem; background: #e0f2fe; color: #0284c7; border-radius: 4px; text-decoration: none;"
+                                title="{{ tag.name_bn or tag.name }}">
+                                {{ tag.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

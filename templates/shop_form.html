@@ -115,6 +115,39 @@ _('Bangladesh Engineering Workshop') }}{% endblock %}
             </div>
         </div>
 
+        <!-- Row 7: Tags (Full Width) - For Search Engine -->
+        <div style="margin-bottom: 1.5rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label>🏷️ {{ _('Tags') }} <span style="font-size: 0.8rem; color: #666; font-weight: normal;">({{
+                        _('separate with comma') }})</span></label>
+
+                <!-- Tags Container - Added tags appear here -->
+                <div id="tags-container" style="margin-top: 0.5rem; margin-bottom: 0.75rem;">
+                    {% if action == 'edit' and shop.tags %}
+                    {% for tag in shop.tags %}
+                    <div class="tag-item" data-tag-id="{{ tag.id }}"
+                        style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; margin-bottom: 0.4rem; background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-radius: 8px; max-width: 400px;">
+                        <span style="flex: 1; color: #0284c7; font-weight: 500;">🏷️ {{ tag.name }}</span>
+                        <button type="button" class="btn-remove-tag" data-tag-id="{{ tag.id }}"
+                            style="background: #fee2e2; color: #dc2626; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;"
+                            title="ট্যাগ সরান">×</button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Add Tag Input -->
+                <div style="display: flex; gap: 0.5rem; align-items: center; max-width: 400px;">
+                    <input type="text" id="new-tag-input" class="form-control"
+                        placeholder="{{ _('e.g. Lathe, Shaft, Bush, লেদ') }}" style="flex: 1;">
+                    <button type="button" id="btn-add-tag" class="btn btn-primary"
+                        style="padding: 0.5rem 1rem; white-space: nowrap;">
+                        ➕ {{ _('Add Tag') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Submit Buttons -->
         <div class="form-actions" style="margin-top: 1rem;">
             <button type="submit" class="btn btn-primary btn-lg">
@@ -130,6 +163,10 @@ _('Bangladesh Engineering Workshop') }}{% endblock %}
 </section>
 
 <script>
+    // Shop ID for edit mode (null for add mode)
+    const SHOP_ID = {% if action == 'edit' and shop_id %}{ { shop_id } } {% else %} null{% endif %};
+    const IS_EDIT_MODE = SHOP_ID !== null;
+
     function previewImage(input) {
         const preview = document.getElementById('imagePreview');
         if (input.files && input.files[0]) {
@@ -150,6 +187,126 @@ _('Bangladesh Engineering Workshop') }}{% endblock %}
         } else {
             newCatInput.style.display = 'none';
         }
+    });
+
+    // ==================== SIMPLE TAG MANAGEMENT ====================
+
+    // Add a tag item to the container (visual only if not in edit mode)
+    function addTagToContainer(tagId, tagName) {
+        const container = document.getElementById('tags-container');
+
+        const tagItem = document.createElement('div');
+        tagItem.className = 'tag-item';
+        tagItem.dataset.tagId = tagId;
+        tagItem.style.cssText = 'display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; margin-bottom: 0.4rem; background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-radius: 8px; max-width: 400px;';
+        tagItem.innerHTML = `
+            <span style="flex: 1; color: #0284c7; font-weight: 500;">🏷️ ${tagName}</span>
+            <button type="button" class="btn-remove-tag" data-tag-id="${tagId}" 
+                style="background: #fee2e2; color: #dc2626; border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;"
+                title="ট্যাগ সরান">×</button>
+        `;
+
+        container.appendChild(tagItem);
+
+        // Add remove handler
+        tagItem.querySelector('.btn-remove-tag').addEventListener('click', handleRemoveTag);
+    }
+
+    // Handle add tag button click
+    // Handle add tag button click
+    document.getElementById('btn-add-tag').addEventListener('click', async function () {
+        const input = document.getElementById('new-tag-input');
+        const rawInput = input.value.trim();
+
+        if (!rawInput) {
+            alert('ট্যাগের নাম লিখুন');
+            return;
+        }
+
+        if (!IS_EDIT_MODE) {
+            alert('প্রথমে দোকান সেভ করুন, তারপর এডিট করে ট্যাগ যোগ করুন।');
+            return;
+        }
+
+        const tags = rawInput.split(',').map(t => t.trim()).filter(t => t);
+
+        for (const tagName of tags) {
+            try {
+                // First create the tag (or get existing)
+                const createResponse = await fetch('/api/tag/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: tagName, name_bn: '' })
+                });
+
+                if (!createResponse.ok) {
+                    console.error('Failed to create tag: ' + tagName);
+                    continue;
+                }
+
+                const tagData = await createResponse.json();
+
+                // Then add it to the shop
+                const addResponse = await fetch(`/api/shop/${SHOP_ID}/tag/add`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tag_id: tagData.id })
+                });
+
+                if (addResponse.ok) {
+                    // Check if already in UI to avoid duplicates
+                    const existing = document.querySelector(`.tag-item[data-tag-id="${tagData.id}"]`);
+                    if (!existing) {
+                        addTagToContainer(tagData.id, tagName);
+                    }
+                }
+            } catch (err) {
+                console.error('Error adding tag: ' + tagName, err);
+            }
+        }
+
+        input.value = '';
+        input.focus();
+    });
+
+    // Allow Enter key to add tag
+    document.getElementById('new-tag-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('btn-add-tag').click();
+        }
+    });
+
+    // Handle remove tag
+    async function handleRemoveTag(e) {
+        const tagId = e.target.dataset.tagId;
+        const tagItem = e.target.closest('.tag-item');
+
+        if (!IS_EDIT_MODE) {
+            tagItem.remove();
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/shop/${SHOP_ID}/tag/remove`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tag_id: tagId })
+            });
+
+            if (response.ok) {
+                tagItem.remove();
+            } else {
+                alert('ট্যাগ সরাতে সমস্যা হয়েছে');
+            }
+        } catch (err) {
+            alert('ট্যাগ সরাতে সমস্যা হয়েছে');
+        }
+    }
+
+    // Attach remove handlers to existing tags
+    document.querySelectorAll('.btn-remove-tag').forEach(btn => {
+        btn.addEventListener('click', handleRemoveTag);
     });
 </script>
 {% endblock %}

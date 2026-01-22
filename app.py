@@ -3,11 +3,24 @@
 Flask Web Application for Shop Details
 """
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_from_directory
-from database import db, Shop, Category
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_from_directory, jsonify
+from database import db, Shop, Category, Tag, ShopTag
 from sqlalchemy import or_
 from flask_babel import Babel, _
 import os
+import sys
+
+# Add the 'python' directory to the system path to allow imports from it
+basedir = os.path.abspath(os.path.dirname(__file__))
+if basedir not in sys.path:
+    sys.path.append(basedir)
+
+python_dir = os.path.join(basedir, 'python')
+if python_dir not in sys.path:
+    sys.path.append(python_dir)
+
+import config
+
 from werkzeug.utils import secure_filename
 import uuid
 
@@ -22,12 +35,10 @@ def allowed_file(filename):
 app = Flask(__name__)
 # Secure secret key
 app.config['SECRET_KEY'] = 'dev-key-please-change'
-# Database configuration
-import os
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'shop_details.db')
+# Database configuration from central config
+app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = config.UPLOAD_FOLDER if hasattr(config, 'UPLOAD_FOLDER') else UPLOAD_FOLDER
 
 # Ensure upload directory exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -320,6 +331,86 @@ def api_shops():
         'per_page': per_page
     })
 
+
+# ==================== TAG API ROUTES ====================
+
+@app.route('/api/tags')
+def api_tags():
+    """API endpoint for all tags"""
+    tags = db.get_all_tags()
+    return jsonify({'tags': tags})
+
+
+@app.route('/api/tag/add', methods=['POST'])
+def api_add_tag():
+    """API endpoint to add a new tag"""
+    data = request.get_json() or request.form
+    name = data.get('name', '').strip()
+    name_bn = data.get('name_bn', '').strip()
+    
+    if not name:
+        return jsonify({'error': 'Tag name is required'}), 400
+    
+    tag_id = db.add_tag(name, name_bn)
+    return jsonify({'id': tag_id, 'name': name, 'name_bn': name_bn})
+
+
+@app.route('/api/tag/delete/<int:tag_id>', methods=['POST', 'DELETE'])
+def api_delete_tag(tag_id):
+    """API endpoint to delete a tag"""
+    if db.delete_tag(tag_id):
+        return jsonify({'success': True})
+    return jsonify({'error': 'Tag not found'}), 404
+
+
+@app.route('/api/shop/<int:shop_id>/tags')
+def api_shop_tags(shop_id):
+    """API endpoint to get tags for a shop"""
+    tags = db.get_shop_tags(shop_id)
+    return jsonify({'shop_id': shop_id, 'tags': tags})
+
+
+@app.route('/api/shop/<int:shop_id>/tag/add', methods=['POST'])
+def api_add_shop_tag(shop_id):
+    """API endpoint to add a tag to a shop"""
+    data = request.get_json() or request.form
+    tag_id = data.get('tag_id')
+    
+    if not tag_id:
+        return jsonify({'error': 'tag_id is required'}), 400
+    
+    try:
+        shop_tag_id = db.add_shop_tag(shop_id, int(tag_id))
+        return jsonify({'success': True, 'shop_tag_id': shop_tag_id})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+
+@app.route('/api/shop/<int:shop_id>/tag/remove', methods=['POST', 'DELETE'])
+def api_remove_shop_tag(shop_id):
+    """API endpoint to remove a tag from a shop"""
+    data = request.get_json() or request.form
+    tag_id = data.get('tag_id')
+    
+    if not tag_id:
+        return jsonify({'error': 'tag_id is required'}), 400
+    
+    if db.remove_shop_tag(shop_id, int(tag_id)):
+        return jsonify({'success': True})
+    return jsonify({'error': 'Tag not found on shop'}), 404
+
+
+@app.route('/search/tag/<tag_name>')
+def search_by_tag(tag_name):
+    """Search shops by tag"""
+    shops = db.search_shops_by_tag(tag_name)
+    return render_template('shop_list.html',
+                         shops=shops,
+                         categories=db.get_all_categories(),
+                         current_tag=tag_name,
+                         page=1,
+                         total_pages=1,
+                         total=len(shops))
 
 
 @app.route('/about-us')
